@@ -1,0 +1,48 @@
+<resources>
+  <string name="app_name">AppErp</string>
+  <string name="action_settings">Settings</string>
+  <string name="hint_user">ingrese su usuario</string>
+  
+  <string name="hint_password">ingrese su contraseña</string>
+  <string name="hint_search">ingrese cualquier criterio de busqueda</string>
+
+  <string name="error_user">debe contener 8 digitos</string>
+  <string name="error_password">no puede ser vacio</string>
+
+  <string name="btn_login_text">INGRESAR</string>
+
+  <string name="empresa_prompt">Selecciona empresa</string>
+  <string-array name="empresa_array">
+    <item>...</item>
+    <item>Vilocrusac</item>
+    <item>Corcrusac</item>
+  </string-array>
+
+  <string name="vilocruserver">http://190.117.137.98:5000/</string>
+  <string name="vilocruruc">20529914718</string>
+  <string name="vilocruempresa">VILOCRU S.A.C.</string>
+  <string name="vilocrudireccion">Mza. 246 Lote. 03 Z.I. Zona Industrial Piura (a Espaldas de Agencia Eppo)</string>
+
+  <string name="corcruserver">http://190.117.137.98:9000/</string>
+  <string name="corcruruc">20483899379</string>
+  <string name="corcruempresa">CORPORACION CRUZ S.A.C.</string>
+  <string name="corcrudireccion">Mza. 246 Lote. 03 Z.I. Zona Industrial Piura (a Espaldas de Agencia Eppo)</string>
+
+  <string name="almacen_tab1">Lineas</string>
+  <string name="almacen_tab2">Sub-Lineas</string>
+  <string name="almacen_tab3">Productos</string>
+  <string name="almacen_tab4">Inventario</string>
+  <string name="drawer_open">Open</string>
+  <string name="drawer_close">Close</string>
+  <string name="synckey">MTg3MjA2QDMxMzcyZTM0MmUzMEt3V0NtY0VhYlpnUXJkOXJ1dTVySFg0T1FoMlgvTXZwQ1E5RTNzbGdic0U9</string>
+  <string name="hint_linea">ingrese nombre de linea</string>
+  <string name="hint_tipo">ingrese nombre de tipo</string>
+  <string name="hint_producto">ingrese nombre de producto</string>
+  <string name="hint_sku">ingrese sku</string>
+  <string name="linea_prompt">Selecciona linea</string>
+  <string name="tipo_prompt">Selecciona tipo</string>
+  <string name="marca_prompt">Selecciona marca</string>
+  <string name="unidad_prompt">Selecciona unidad</string>
+  <string name="tipo_mov_entrega">8</string>
+  <string name="tipo_mov_inventario">7</string>
+</resources>

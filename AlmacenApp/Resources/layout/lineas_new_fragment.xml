@@ -1,0 +1,105 @@
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/md_text_white"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:minWidth="150dp"
+    android:minHeight="150dp"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/txtTileLineaFr">
+        <TextView
+            android:text="REGISTRO DE LINEA"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:textColor="@android:color/black"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:gravity="center_horizontal" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:layout_below="@id/txtTileLineaFr"
+        android:id="@+id/linearOneFr"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp">
+        <TextView
+            android:text="DESCRIPCION LINEA:  "
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtlineaFrg"
+            android:layout_centerHorizontal="false"
+            android:layout_alignParentLeft="false"
+            android:layout_below="@id/txtTileLineaFr"
+            android:gravity="left"
+            android:layout_marginLeft="40px"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="20px" />
+        <android.support.design.widget.TextInputLayout
+                android:id="@+id/txt_linea"
+                android:layout_width="500dp"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/edt_linea"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:hint="@string/hint_linea"
+                    android:inputType="text" />
+            </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_below="@id/linearOneFr"
+        android:id="@+id/linearTwo"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp">
+        <Button
+            android:text="GUARDAR"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linearOneFr"
+            android:id="@+id/btnGuardarLineaFrg"
+            android:textSize="20dp"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:height="60dp"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:background="@drawable/deletecustombutton"
+            android:layout_marginRight="30dp" />
+        <Button
+            android:text="CANCELAR"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linearOneFr"
+            android:id="@+id/btnCancelarNewLineaFrg"
+            android:textSize="20dp"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:height="60dp"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:background="@drawable/signincustombutton"
+            android:layout_marginLeft="30dp" />
+    </LinearLayout>
+</LinearLayout>

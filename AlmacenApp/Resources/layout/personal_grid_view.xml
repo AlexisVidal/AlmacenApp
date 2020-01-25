@@ -1,0 +1,45 @@
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:weightSum="1">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.3"
+        android:gravity="center_vertical|center_horizontal">
+        <TextView
+            android:text="DOCUMENTO:"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtCodSalidaPersonal"
+            android:layout_marginTop="10dp"
+            android:typeface="normal"
+            android:textStyle="normal"
+            android:textSize="16dp"
+            android:textColor="#343434"/>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.7"
+        android:gravity="center_vertical|center_horizontal">
+        <TextView
+            android:text="NOMBRES:"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtNombresSalidaPersonal"
+            android:layout_marginTop="10dp"
+            android:typeface="normal"
+            android:textStyle="normal"
+            android:textSize="16dp"
+            android:textColor="#343434"/>
+    </LinearLayout>
+</LinearLayout>

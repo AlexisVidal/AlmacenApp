@@ -1,0 +1,38 @@
+<resources>
+  <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+    <!-- Customize your theme here. -->
+    <item name="colorPrimary">@color/md_indigo_500</item>
+    <item name="colorPrimaryDark">@color/md_indigo_700</item>
+    <item name="android:windowBackground">@color/window_background</item>
+  </style>
+  <style name="AppThemeCompat" parent="Theme.AppCompat">
+    <!-- Customize your theme here. -->
+    <item name="colorPrimary">@color/md_indigo_500</item>
+    <item name="colorPrimaryDark">@color/md_indigo_700</item>
+    <item name="android:windowBackground">@color/window_background</item>
+  </style>
+  <style name="AppTheme2" parent="Theme.AppCompat.NoActionBar">
+    <!-- Customize your theme here. -->
+    <item name="colorPrimary">@color/md_red_500</item>
+    <item name="colorPrimaryDark">@color/md_red_700</item>
+    <item name="android:windowBackground">@color/window_background</item>
+  </style>
+  <style name="AppTheme3" parent="Theme.AppCompat.NoActionBar">
+    <item name="colorPrimary">@color/md_blue_cromo500</item>
+    <item name="colorPrimaryDark">@color/md_blue_cromo700</item>
+    <item name="android:windowBackground">@color/window_background</item>
+  </style>
+  <style name="AppFullScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowActionBar">false</item>
+    <item name="android:windowFullscreen">true</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:windowBackground">@color/window_background</item>
+  </style>
+  <style name="NavigationStyle" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="colorPrimary">@color/uberAccentColor</item>
+    <item name="colorPrimaryDark">@color/uberAccentColor</item>
+    <item name="colorAccent">@color/uberAccentColor</item>
+    <item name="android:windowBackground">@color/window_background</item>
+  </style>
+</resources>

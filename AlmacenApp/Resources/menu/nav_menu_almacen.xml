@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+  
+  <group android:checkableBehavior="single">
+    <item
+      android:id="@+id/menu_almacen_lineas"
+      android:title="Lineas"
+      android:icon="@mipmap/ic_wallet_action"/>
+    <item
+    android:id="@+id/menu_almacen_sublineas"
+    android:title="Tipos"
+    android:icon="@mipmap/ic_person_action"/>
+
+    <item
+    android:id="@+id/menu_almacen_productos"
+    android:title="Productos"
+    android:icon="@mipmap/ic_wallet_action"/>
+    <item
+    android:id="@+id/menu_almacen_inventario"
+    android:title="Inventario"
+    android:icon="@mipmap/ic_wallet_action"/>
+    <item
+    android:id="@+id/menu_almacen_salidas"
+    android:title="Salidas"
+    android:icon="@mipmap/ic_wallet_action"/>
+  </group>
+</menu>

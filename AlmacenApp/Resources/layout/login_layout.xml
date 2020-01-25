@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sw="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical"
+    android:fillViewport="true"
+    android:nestedScrollingEnabled="true">
+    <LinearLayout
+        android:id="@+id/linearloginmain"
+        android:orientation="vertical"
+        android:background="@color/md_white_1000"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".LoginActivity"
+        android:gravity="center">
+        <LinearLayout
+            android:id="@+id/subLayout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:gravity="center">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal|center_vertical">
+                <ImageView
+                    android:src="@drawable/vilocrusac"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageLogo" />
+                <ImageView
+                    android:src="@drawable/corcrusac"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageLogo2" />
+            </LinearLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/txt_user"
+                android:layout_width="400dp"
+                android:layout_height="?android:attr/actionBarSize">
+                <EditText
+                    android:id="@+id/edt_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:hint="@string/hint_user"
+                    android:inputType="text" />
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/txt_password"
+                android:layout_width="400dp"
+                android:layout_height="?android:attr/actionBarSize">
+                <EditText
+                    android:id="@+id/edt_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:hint="@string/hint_password"
+                    android:inputType="textPassword"
+                    android:textColor="@android:color/black" />
+            </android.support.design.widget.TextInputLayout>
+            <Spinner
+                android:id="@+id/spinner_empresa"
+                android:layout_width="400dp"
+                android:layout_height="?android:attr/actionBarSize"
+                android:prompt="@string/empresa_prompt" />
+            <Button
+                android:text="@string/btn_login_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_login"
+                android:layout_marginLeft="140dp"
+                android:layout_marginRight="140dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="20dp"
+                android:textSize="20sp"
+                android:background="@drawable/custombutton"
+            android:textColor="@color/white"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

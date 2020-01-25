@@ -1,0 +1,95 @@
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/md_text_white"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:minWidth="150dp"
+    android:minHeight="150dp"
+    android:orientation="vertical">
+    <TextView
+        android:text="ELIMINAR PRODUCTO"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtTileEliminarFrgProducto"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center_horizontal" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:id="@+id/linearOneProducto"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp">
+        <TextView
+            android:text="PRODUCTO:  "
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="false"
+            android:layout_alignParentLeft="false"
+            android:gravity="left"
+            android:layout_marginLeft="40px"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="10px" />
+        <TextView
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="fill_parent"
+            android:id="@+id/txtDetalleProductoFrg"
+            android:layout_centerHorizontal="false"
+            android:layout_alignParentLeft="false"
+            android:gravity="left"
+            android:layout_marginLeft="5dp"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+        <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:id="@+id/linearTwo"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp">
+        <Button
+            android:text="ELIMINAR"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnDeleteProductoFrg"
+            android:textSize="20dp"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:height="60dp"
+            android:gravity="center"
+            android:background="@drawable/deletecustombutton"
+            android:layout_marginRight="30dp" />
+        <Button
+            android:text="CANCELAR"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnCancelarProductoFrgD"
+            android:textSize="20dp"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:height="60dp"
+            android:gravity="center"
+            android:background="@drawable/signincustombutton"
+            android:layout_marginLeft="30dp" />
+    </LinearLayout>
+
+</LinearLayout>

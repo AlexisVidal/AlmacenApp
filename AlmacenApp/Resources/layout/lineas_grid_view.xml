@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.2"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_gravity="center"
+        android:gravity="center">
+        <ImageButton
+            android:src="@drawable/delete40"
+            android:layout_width="100px"
+            android:layout_height="55px"
+            android:id="@+id/ibtndeletelinea"
+            android:scaleType="center"
+            android:background="@android:color/transparent" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.1"
+        android:gravity="center_vertical">
+        <TextView
+            android:text="CODIGO:"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtcodlinea"
+            android:textColor="#343434"
+            android:layout_marginTop="10dp"
+            android:typeface="normal"
+            android:textSize="14dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.7"
+        android:layout_gravity="center"
+        android:gravity="center">
+        <TextView
+            android:text="DESCRIPCION:"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtlinea"
+            android:textColor="#343434"
+            android:layout_marginTop="10dp"
+            android:typeface="normal"
+            android:textSize="14dp" />
+    </LinearLayout>
+</LinearLayout>
