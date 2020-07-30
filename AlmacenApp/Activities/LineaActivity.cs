@@ -122,6 +122,11 @@ namespace AlmacenApp.Activities
                     var newactis = new Intent(this, typeof(ProductoSalidaActivity));
                     StartActivity(newactis);
                     break;
+                case Resource.Id.menu_almacen_personal:
+                    toolbar.Title = "Reporte";
+                    var newactirps = new Intent(this, typeof(ProductoPersonalHistoryActivity));
+                    StartActivity(newactirps);
+                    break;
             }
         }
         public override bool OnCreateOptionsMenu(IMenu menu)

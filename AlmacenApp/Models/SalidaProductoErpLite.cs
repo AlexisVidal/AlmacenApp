@@ -21,5 +21,9 @@ namespace AlmacenApp.Models
         public string IDCODIGOGENERAL { get; set; }
         public DateTime fecha_registro { get; set; }
         public string estado { get; set; }
+        public string nomb_full { get; set; }
+        public string nombre_almacen { get; set; }
+        public string ubicacion { get; set; }
+        public int fk_almacen { get; set; }
     }
 }

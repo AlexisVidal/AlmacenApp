@@ -18,6 +18,7 @@ using Android.Views;
 using Android.Widget;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Plugin.Connectivity;
 
 namespace AlmacenApp.Fragments
 {
@@ -66,7 +67,7 @@ namespace AlmacenApp.Fragments
             _ap = new AppPreferences(_mContext);
         }
 
-        private void _btnLogin_Click(object sender, EventArgs e)
+        private async void _btnLogin_Click(object sender, EventArgs e)
         {
             progress = new ProgressDialog(this);
             progress.Indeterminate = true;
@@ -107,6 +108,12 @@ namespace AlmacenApp.Fragments
             else if (_empresa == "Vilocrusac")
             {
                 serverurl = GetString(Resource.String.vilocruserver);
+                bool remotook = await CheckRemoto(serverurl);
+                //var isReachable = await CrossConnectivity.Current.IsRemoteReachable(serverurl, 5000);
+                if (!remotook)
+                {
+                    serverurl = GetString(Resource.String.vilocruserverlocal);
+                }
                 ruc = GetString(Resource.String.vilocruruc);
                 nombreempre = GetString(Resource.String.vilocruempresa);
                 direccionempre = GetString(Resource.String.vilocrudireccion);
@@ -114,6 +121,12 @@ namespace AlmacenApp.Fragments
             else if (_empresa == "Corcrusac")
             {
                 serverurl = GetString(Resource.String.corcruserver);
+                bool remotook = await CheckRemoto(serverurl);
+                //var isReachable = await CrossConnectivity.Current.IsReachable(serverurl, 5000);
+                if (!remotook)
+                {
+                    serverurl = GetString(Resource.String.corcruserverlocal);
+                }
                 ruc = GetString(Resource.String.corcruruc);
                 nombreempre = GetString(Resource.String.corcruempresa);
                 direccionempre = GetString(Resource.String.corcrudireccion);
@@ -145,6 +158,7 @@ namespace AlmacenApp.Fragments
                             usuarioen = _lusuario.FirstOrDefault();
                             _ap.saveAccessKey(usuarioen.IDUSUARIO.ToString());
                             _ap.saveIdKey(usuarioen.IDUSUARIO.ToString());
+                            _ap.saveIdCodigoGeneralLoginTempKey(usuarioen.IDCODIGOGENERAL.ToString());
                             _ap.saveNombresKey(usuarioen.NOMBRES + " " + usuarioen.A_PATERNO + " " + usuarioen.A_MATERNO);
                             _ap.saveServerurlKey(serverurl);
                             _ap.saveRucKey(ruc);
@@ -173,6 +187,25 @@ namespace AlmacenApp.Fragments
                     }
                 }
             }).ContinueWith(info => RunOnUiThread(() => progress.Hide()));
+        }
+
+        private async Task<bool> CheckRemoto(string serverurl)
+        {
+            bool isok = false;
+            _ap.saveServerurlKey(serverurl);
+            try
+            {
+                var data = await Data.CargaAlmacenes();
+                if (data.Any())
+                {
+                    isok = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex);
+            }
+            return isok;
         }
 
         private async Task<HttpResponseMessage> ValidaLogueo(string usuario, string claveEncrip)

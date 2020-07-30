@@ -18,7 +18,7 @@ using AlmacenApp.Activities;
 
 namespace AlmacenApp.Fragments
 {
-    [Activity(Label = "Almacen", MainLauncher = false, WindowSoftInputMode = SoftInput.AdjustPan, ScreenOrientation = Android.Content.PM.ScreenOrientation.Landscape, Theme = "@style/NavigationStyle")]
+    [Activity(Label = "Almacen", MainLauncher = false, WindowSoftInputMode = SoftInput.AdjustPan, ScreenOrientation = Android.Content.PM.ScreenOrientation.Landscape, Theme = "@style/NavigationStyle", NoHistory = true)]
     public class AlmacenActivity : AppCompatActivity
     {
         private AppPreferences _ap;
@@ -82,6 +82,11 @@ namespace AlmacenApp.Fragments
                     var newactis = new Intent(this, typeof(ProductoSalidaActivity));
                     StartActivity(newactis);
                     break;
+                case Resource.Id.menu_almacen_personal:
+                    toolbar.Title = "Reporte";
+                    var newactirps = new Intent(this, typeof(ProductoPersonalHistoryActivity));
+                    StartActivity(newactirps);
+                    break;
             }
         }
 
@@ -103,6 +108,6 @@ namespace AlmacenApp.Fragments
             return true;
         }
 
-        
+
     }
 }

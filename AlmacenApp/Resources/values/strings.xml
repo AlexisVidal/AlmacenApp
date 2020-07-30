@@ -18,12 +18,14 @@
     <item>Corcrusac</item>
   </string-array>
 
-  <string name="vilocruserver">http://190.117.137.98:5000/</string>
+  <string name="vilocruserver">http://190.117.184.215:5000/</string>
+  <string name="vilocruserverlocal">http://192.168.1.3:5000/</string>
   <string name="vilocruruc">20529914718</string>
   <string name="vilocruempresa">VILOCRU S.A.C.</string>
   <string name="vilocrudireccion">Mza. 246 Lote. 03 Z.I. Zona Industrial Piura (a Espaldas de Agencia Eppo)</string>
 
-  <string name="corcruserver">http://190.117.137.98:9000/</string>
+  <string name="corcruserver">http://190.117.184.215:9000/</string>
+  <string name="corcruserverlocal">http://192.168.1.3:9000/</string>
   <string name="corcruruc">20483899379</string>
   <string name="corcruempresa">CORPORACION CRUZ S.A.C.</string>
   <string name="corcrudireccion">Mza. 246 Lote. 03 Z.I. Zona Industrial Piura (a Espaldas de Agencia Eppo)</string>

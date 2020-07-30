@@ -34,6 +34,9 @@ namespace AlmacenApp.Fragments
         private EditText edt_searchproductsListSalida;
         ListView rvproductosSalida;
         List<ProductoErpLite> listproductos;
+
+        ListView rvproductosSelectedSalida;
+
         TextView txtProductoSelected;
         EditText edtCantxSalida;
         Button btnCantSalida;
@@ -42,9 +45,23 @@ namespace AlmacenApp.Fragments
         string cod_producto = "";
         string nom_producto = "";
         string descripcion_producto_tipo = "";
+        string abreviatura = "";
+        string almacen = "";
         DataHelpers db;
         int idalmacen = 0;
         int resultadomovimiento = 0;
+        Button btnClosePSIFrg;
+        int idsalidaactual = 0;
+
+        List<SalidaProductoErpLite> lsalidaslite;
+        List<MovimientoErpLite> lmovimientoslite;
+        ProductoSalidaPersonalFragmentAdapter productsalidaactivity;
+        public override void OnDismiss(IDialogInterface dialog)
+        {
+            base.OnDismiss(dialog);
+            Activity activity = this.Activity;
+            ((IDialogInterfaceOnDismissListener)activity).OnDismiss(dialog);
+        }
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -63,19 +80,26 @@ namespace AlmacenApp.Fragments
             view = inflater.Inflate(Resource.Layout.producto_salida_add_product_fragment, container, true);
             thiscontext = inflater.Context;
             _ap = new AppPreferences(_mContext);
+            idsalidaactual = Convert.ToInt32(_ap.getIdSalidaMovimientoTempKey());
             idalmacen = Convert.ToInt32(_ap.getIdAlmacenTempKey());
             db = new DataHelpers();
             db.CreateDatabaseInventarioInicial();
             listproductos = new List<ProductoErpLite>();
             _connectionInfo = _ap.getServerurlKey();
             idcodigogeneral = _ap.getIdCodigoGeneralTempKey();
+            nom_producto = _ap.getProductoKey();
+            abreviatura = _ap.getProductoAbreviaturaKey();
+            almacen = _ap.getAlmacenTempKey();
             txtTrabajadorNombre = view.FindViewById<TextView>(Resource.Id.txtTrabajadorNombre);
+            btnClosePSIFrg = view.FindViewById<Button>(Resource.Id.btnClosePSIFrg);
             nombretrabajador = _ap.getNombreTrabajadorTempKey();
             if (nombretrabajador != "")
             {
                 this.Activity.RunOnUiThread(() => txtTrabajadorNombre.Text = nombretrabajador);
             }
             rvproductosSalida = view.FindViewById<ListView>(Resource.Id.rvproductosSalida);
+            rvproductosSelectedSalida = view.FindViewById<ListView>(Resource.Id.rvproductosSelectedSalida);
+
             edt_searchproductsListSalida = view.FindViewById<EditText>(Resource.Id.edt_searchproductsListSalida);
             edt_searchproductsListSalida.EditorAction += (sender, args) =>
             {
@@ -89,9 +113,23 @@ namespace AlmacenApp.Fragments
             txtProductoSelected = view.FindViewById<TextView>(Resource.Id.txtProductoSelected);
             edtCantxSalida = view.FindViewById<EditText>(Resource.Id.edtCantxSalida);
             btnCantSalida = view.FindViewById<Button>(Resource.Id.btnCantSalida);
+
             btnCantSalida.Click += BtnCantSalida_Click;
+            btnClosePSIFrg.Click += BtnClosePSIFrg_Click;
+            LlenaData();
             return view;
         }
+
+        private void BtnClosePSIFrg_Click(object sender, EventArgs e)
+        {
+            
+            var mifragment = (ProductoSalidaPersonalFragment)FragmentManager.FindFragmentByTag("fragnew");
+            mifragment?.Dismiss();
+            var mifragment2 = (ProductoSalidaPersonalFragment)FragmentManager.FindFragmentByTag("fragnew");
+            mifragment2?.Dismiss();
+            Dismiss();
+        }
+
 
         internal void EliminaMovimiento(object sender, string idmovimiento)
         {
@@ -99,13 +137,27 @@ namespace AlmacenApp.Fragments
             {
                 if (idmovimiento != "0")
                 {
-
+                    bool result = db.deleteQueryTableMovimientoById(Convert.ToInt32(idmovimiento));
+                    if (result)
+                    {
+                        Android.Support.V7.App.AlertDialog.Builder alert = new Android.Support.V7.App.AlertDialog.Builder(thiscontext);
+                        this.Activity.RunOnUiThread(() => alert.SetTitle("Correcto"));
+                        this.Activity.RunOnUiThread(() => alert.SetMessage("Item se eliminó correctamente!"));
+                        this.Activity.RunOnUiThread(() => alert.SetNeutralButton("Ok", delegate
+                        {
+                            LlenaData();
+                        }));
+                        this.Activity.RunOnUiThread(() => alert.Show());
+                    }
+                    else
+                    {
+                        this.Activity.RunOnUiThread(() => Toast.MakeText(thiscontext, "Tipo no eliminado!", ToastLength.Short).Show());
+                    }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                LlenaData();
             }
         }
 
@@ -133,12 +185,28 @@ namespace AlmacenApp.Fragments
                             fk_almacen = idalmacen,
                             fk_producto = id_producto,
                             cod_producto = cod_producto,
+                            nombre_full = nombretrabajador,
                             nombre_producto = nom_producto,
                             producto_tipo = descripcion_producto_tipo,
                             cantidad = cant,
-                            IDCODIGOGENERAL = idcodigogeneral
+                            IDCODIGOGENERAL = idcodigogeneral,
+                            IdSalida = idsalidaactual,
+                            abreviatura = abreviatura,
+                            almacen = almacen
                         };
                         resultadomovimiento = db.insertIntoMovimiento(movimiento);
+                        if (resultadomovimiento > 0)
+                        {
+                            this.Activity.RunOnUiThread(() => Toast.MakeText(thiscontext, "Se insertó correctamente!", ToastLength.Short).Show());
+                            id_producto = 0;
+                            cod_producto = "";
+                            nom_producto = "";
+                            descripcion_producto_tipo = "";
+                            almacen = "";
+                            this.Activity.RunOnUiThread(() => edtCantxSalida.Text = "");
+                            this.Activity.RunOnUiThread(() => txtProductoSelected.Text = "");
+                            LlenaData();
+                        }
                     }
                     else
                     {
@@ -152,6 +220,50 @@ namespace AlmacenApp.Fragments
             }
         }
 
+        private void LlenaData()
+        {
+            int movimientos = 0;
+            try
+            {
+                this.Activity.RunOnUiThread(() => rvproductosSelectedSalida.SetAdapter(null));
+            }
+            catch (Exception re)
+            {
+
+            }
+            try
+            {
+                lmovimientoslite = new List<MovimientoErpLite>();
+                var vlmovimientoslite = db.selectTableMovimiento();
+                if (vlmovimientoslite.Any())
+                {
+                    var salidamovimientos = vlmovimientoslite.Where(x => x.IdSalida == idsalidaactual && x.fk_movimiento_tipo == 8 && x.IDCODIGOGENERAL.Equals(idcodigogeneral)).ToList();
+                    if (salidamovimientos.Any())
+                    {
+                        movimientos = salidamovimientos.Count();
+                        this.Activity.RunOnUiThread(() => productsalidaactivity = new ProductoSalidaPersonalFragmentAdapter(_mContext, salidamovimientos, this));
+                        this.Activity.RunOnUiThread(() => rvproductosSelectedSalida.Adapter = productsalidaactivity);
+                        this.Activity.RunOnUiThread(() => rvproductosSelectedSalida.ItemClick += rvproductosSelectedSalida_ItemClick);
+                    }
+                    else
+                    {
+                        this.Activity.RunOnUiThread(() => rvproductosSelectedSalida.SetAdapter(null));
+                    }
+                }
+                else
+                {
+                    this.Activity.RunOnUiThread(() => rvproductosSelectedSalida.SetAdapter(null));
+                }
+            }
+            catch (Exception ex)
+            {
+                this.Activity.RunOnUiThread(() => Toast.MakeText(thiscontext, "OCURRIO UN ERROR AL MOSTRAR LISTADO! EXEPCION: " + ex.Message, ToastLength.Short).Show());
+            }
+        }
+        private void rvproductosSelectedSalida_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        {
+
+        }
         private void _btnSearchP_Click(object sender, TextView.EditorActionEventArgs args)
         {
             string buscar = edt_searchproductsListSalida.Text;
@@ -190,6 +302,7 @@ namespace AlmacenApp.Fragments
                 cod_producto = listproductos[e.Position].cod_producto.ToString();
                 nom_producto = listproductos[e.Position].nom_producto.ToString();
                 descripcion_producto_tipo = listproductos[e.Position].producto_tipo.ToString();
+                abreviatura = listproductos[e.Position].abreviatura.ToString();
                 if (id_producto > 0 && nom_producto != "")
                 {
                     this.Activity.RunOnUiThread(() => txtProductoSelected.Text = nom_producto);
@@ -200,6 +313,7 @@ namespace AlmacenApp.Fragments
                     cod_producto = "";
                     nom_producto = "";
                     descripcion_producto_tipo = "";
+                    abreviatura = "";
                 }
             }
             catch (Exception ex)
@@ -208,6 +322,7 @@ namespace AlmacenApp.Fragments
                 cod_producto = "";
                 nom_producto = "";
                 descripcion_producto_tipo = "";
+                abreviatura = "";
             }
         }
     }

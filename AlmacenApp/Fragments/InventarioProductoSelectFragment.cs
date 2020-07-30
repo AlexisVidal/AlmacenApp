@@ -121,6 +121,8 @@ namespace AlmacenApp.Fragments
                     this.Activity.RunOnUiThread(() => Toast.MakeText(thiscontext, "Item se actualizó correctamente!", ToastLength.Long).Show());
                     var mifragment = (InventarioProductoSelectFragment)FragmentManager.FindFragmentByTag("selecinventfg");
                     mifragment?.Dismiss();
+                    var mifragment2 = (InventarioProductoSelectFragment)FragmentManager.FindFragmentByTag("selecinventfg");
+                    mifragment2?.Dismiss();
                 }
                 else
                 {

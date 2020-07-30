@@ -43,7 +43,34 @@ namespace AlmacenApp.Resources.DataHelpers
                 return false;
             }
         }
-
+        public bool CleanDatabaseInventarioInicial()
+        {
+            try
+            {
+                using (var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "Ventas.db")))
+                {
+                    try
+                    {
+                        connection.DropTable<ProductoErpLite>();
+                        connection.DropTable<SalidaProductoErpLite>();
+                        connection.DropTable<MovimientoErpLite>();
+                    }
+                    catch (SQLiteException ex)
+                    {
+                        Log.Info("SQLiteEx", ex.Message);
+                    }
+                    connection.CreateTable<ProductoErpLite>();
+                    connection.CreateTable<MovimientoErpLite>();
+                    connection.CreateTable<SalidaProductoErpLite>();
+                    return true;
+                }
+            }
+            catch (SQLiteException ex)
+            {
+                Log.Info("SQLiteEx", ex.Message);
+                return false;
+            }
+        }
         public bool CreateDatabaseAlmacen()
         {
             try
@@ -376,6 +403,22 @@ namespace AlmacenApp.Resources.DataHelpers
                 return false;
             }
         }
+        public bool deleteQueryTableMovimientoTipo(int tipo)
+        {
+            try
+            {
+                using (var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "Ventas.db")))
+                {
+                    connection.Query<MovimientoErpLite>("DELETE FROM MovimientoErpLite Where fk_movimiento_tipo = ?", tipo);
+                    return true;
+                }
+            }
+            catch (SQLiteException ex)
+            {
+                Log.Info("SQLiteEx", ex.Message);
+                return false;
+            }
+        }
         public bool deleteQueryTableMovimientoByAlmacen(int idalmacen)
         {
             try
@@ -392,7 +435,22 @@ namespace AlmacenApp.Resources.DataHelpers
                 return false;
             }
         }
-
+        public bool deleteQueryTableMovimientoById(int Id)
+        {
+            try
+            {
+                using (var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "Ventas.db")))
+                {
+                    connection.Query<MovimientoErpLite>("DELETE FROM MovimientoErpLite Where Id = ?", Id);
+                    return true;
+                }
+            }
+            catch (SQLiteException ex)
+            {
+                Log.Info("SQLiteEx", ex.Message);
+                return false;
+            }
+        }
         public bool insertProductoAllLite(ProductoErp entidad)
         {
             try

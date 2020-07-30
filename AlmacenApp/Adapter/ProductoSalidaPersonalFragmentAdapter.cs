@@ -82,7 +82,7 @@ namespace AlmacenApp.Adapter
             txtUnidadSI.Text = listItems[position].abreviatura.ToString();
 
             TextView txtCantSI = row.FindViewById<TextView>(Resource.Id.txtCantSI);
-            txtCantSI.Text = listItems[position].abreviatura.ToString();
+            txtCantSI.Text = listItems[position].cantidad.ToString();
 
             return row;
         }

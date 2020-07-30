@@ -38,6 +38,7 @@ namespace AlmacenApp.Clases
         internal static async Task<int> InserLinea(string descripcion)
         {
             ProductoLineaErp newinsert;
+            _connectionInfo = _ap.getServerurlKey();
             try
             {
                 List<ResultadoInsert> lrespuestax = new List<ResultadoInsert>();
@@ -84,6 +85,7 @@ namespace AlmacenApp.Clases
 
         internal static async Task<int> DeleteProducto(int idproducto)
         {
+            _connectionInfo = _ap.getServerurlKey();
             ProductoErp newinsert;
             try
             {
@@ -126,6 +128,7 @@ namespace AlmacenApp.Clases
 
         internal static async Task<List<AlmacenErp>> CargaAlmacenes()
         {
+            _connectionInfo = _ap.getServerurlKey();
             try
             {
                 HttpClient client = new HttpClient();
@@ -164,6 +167,7 @@ namespace AlmacenApp.Clases
 
         internal static async Task<int> UpdateLinea(string descripcion, int idproductolinea)
         {
+            _connectionInfo = _ap.getServerurlKey();
             ProductoLineaErp newinsert;
             try
             {
@@ -212,6 +216,7 @@ namespace AlmacenApp.Clases
 
         public static async Task<List<ProductoLineaErp>> CargaProductoLineas()
         {
+            _connectionInfo = _ap.getServerurlKey();
             try
             {
                 HttpClient client = new HttpClient();
@@ -250,6 +255,7 @@ namespace AlmacenApp.Clases
 
         internal static async Task<int> InsertaMovimientoDB(MovimientoErp movimiento)
         {
+            _connectionInfo = _ap.getServerurlKey();
             int newidmovimiento = 0;
             try
             {
@@ -294,9 +300,46 @@ namespace AlmacenApp.Clases
             }
             return newidmovimiento;
         }
+        internal static async Task<int> InsertaSalidaProductoDB(SalidaProductoErp salida)
+        {
+            _connectionInfo = _ap.getServerurlKey();
+            int newidsalida = 0;
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(_connectionInfo);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                string serializedObject = JsonConvert.SerializeObject(salida);
+                HttpContent contentPost = new StringContent(serializedObject, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("Movimiento/t_salida_almacenInsert", contentPost);
+                if (response.IsSuccessStatusCode)
+                {
+                    var resultao = await response.Content.ReadAsStringAsync();
+                    if (resultao != null && resultao != "")
+                    {
+                        newidsalida =  Convert.ToInt32(resultao);
+                    }
+                    else
+                    {
+                        newidsalida = 0;
+                    }
+                }
+                else
+                {
+                    newidsalida = 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                newidsalida = 0;
+            }
+            return newidsalida;
+        }
 
         public static async Task<List<ProductoTipoErp>> CargaProductoTipos()
         {
+            _connectionInfo = _ap.getServerurlKey();
             try
             {
                 HttpClient client = new HttpClient();
@@ -333,6 +376,7 @@ namespace AlmacenApp.Clases
         }
         internal static async Task<int> InserTipo(int idproductolinea,string descripcion, string abreviatura_tipo)
         {
+            _connectionInfo = _ap.getServerurlKey();
             ProductoTipoErp newinsert;
             try
             {
@@ -378,6 +422,7 @@ namespace AlmacenApp.Clases
 
         internal static async Task<int> UpdateProducto(int idproducto, int idproductounidad, int idproductomarca, int idproductotipo, string descripcion, string codigosku)
         {
+            _connectionInfo = _ap.getServerurlKey();
             ProductoErp newinsert;
             try
             {
@@ -427,6 +472,7 @@ namespace AlmacenApp.Clases
 
         internal static async Task<int> InserProducto(int idproductounidad, int idproductomarca, int idproductotipo, string descripcion, string codigosku)
         {
+            _connectionInfo = _ap.getServerurlKey();
             ProductoErp newinsert;
             try
             {
@@ -474,6 +520,7 @@ namespace AlmacenApp.Clases
 
         internal static async Task<int> UpdateTipo(string descripcion, int idproductotipo, int idproductolinea)
         {
+            _connectionInfo = _ap.getServerurlKey();
             ProductoTipoErp newinsert;
             try
             {
@@ -517,6 +564,7 @@ namespace AlmacenApp.Clases
         }
         public static async Task<int> DeleteTipo(int idproductotipo)
         {
+            _connectionInfo = _ap.getServerurlKey();
             ProductoTipoErp newinsert;
             try
             {
@@ -558,6 +606,7 @@ namespace AlmacenApp.Clases
         }
         public static async Task<List<ProductoErp>> BuscaProductos(string buscar)
         {
+            _connectionInfo = _ap.getServerurlKey();
             try
             {
                 buscar = buscar.Trim();
@@ -601,6 +650,7 @@ namespace AlmacenApp.Clases
         }
         public static async Task<List<ProductoErpLite>> BuscaProductosLite(string buscar)
         {
+            _connectionInfo = _ap.getServerurlKey();
             try
             {
                 buscar = buscar.Trim();
@@ -644,6 +694,7 @@ namespace AlmacenApp.Clases
         }
         public static async Task<List<ProductoErpLite>> BuscaProductosFkalmacenLite(string buscar, int fkalmacen)
         {
+            _connectionInfo = _ap.getServerurlKey();
             try
             {
                 buscar = buscar.Trim();
@@ -687,6 +738,7 @@ namespace AlmacenApp.Clases
         }
         public static async Task<List<ProductoErp>> CargaProductos()
         {
+            _connectionInfo = _ap.getServerurlKey();
             try
             {
                 HttpClient client = new HttpClient();
@@ -724,6 +776,7 @@ namespace AlmacenApp.Clases
         }
         public static async Task<List<ProductoMarcaErp>> CargaProductoMarcas()
         {
+            _connectionInfo = _ap.getServerurlKey();
             try
             {
                 HttpClient client = new HttpClient();
@@ -761,6 +814,7 @@ namespace AlmacenApp.Clases
         }
         public static async Task<List<PersonalErpLite>> BuscaPersonal(string buscar)
         {
+            _connectionInfo = _ap.getServerurlKey();
             try
             {
                 buscar = buscar.Trim();
@@ -804,6 +858,7 @@ namespace AlmacenApp.Clases
         }
         public static async Task<List<UnidadMedidaErp>> CargaUnidadMedidaErp()
         {
+            _connectionInfo = _ap.getServerurlKey();
             try
             {
                 HttpClient client = new HttpClient();
@@ -841,13 +896,14 @@ namespace AlmacenApp.Clases
         }
         public static async Task<List<SalidaProductoErp>> GetSalidasAlmacen()
         {
+            _connectionInfo = _ap.getServerurlKey();
             try
             {
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri(_connectionInfo);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage response = await client.GetAsync("Productoerp/t_salida_almacenAll");
+                HttpResponseMessage response = await client.GetAsync("Movimiento/t_salida_almacenAll");
 
                 if (response.IsSuccessStatusCode && response.RequestMessage != null)
                 {
@@ -873,6 +929,45 @@ namespace AlmacenApp.Clases
             catch (Exception ex)
             {
                 return new List<SalidaProductoErp>();
+            }
+        }
+
+        public static async Task<List<MovimientoErp>> CargaMovimientosSalidas()
+        {
+            _connectionInfo = _ap.getServerurlKey();
+            try
+            {
+                HttpClient client = new HttpClient();
+                //var _connectionInfo = serverurl;
+                client.BaseAddress = new Uri(_connectionInfo);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage response = await client.GetAsync("Movimiento/t_movimientoInventarioSalidaAll");
+
+                if (response.IsSuccessStatusCode && response.RequestMessage != null)
+                {
+                    JArray jentidad = JArray.Parse(await response.Content.ReadAsStringAsync());
+                    JsonSerializerSettings settings = new JsonSerializerSettings();
+                    settings.NullValueHandling = NullValueHandling.Ignore;
+                    settings.MissingMemberHandling = MissingMemberHandling.Ignore;
+                    if (jentidad != null && jentidad.Count > 0)
+                    {
+                        var listlineaxs = JsonConvert.DeserializeObject<List<MovimientoErp>>(jentidad.ToString(), settings);
+                        return listlineaxs;
+                    }
+                    else
+                    {
+                        return new List<MovimientoErp>();
+                    }
+                }
+                else
+                {
+                    return new List<MovimientoErp>();
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<MovimientoErp>();
             }
         }
     }

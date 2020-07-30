@@ -163,56 +163,56 @@ namespace AlmacenApp.Activities
 
             try
             {
-                    progress3 = new ProgressDialog(this);
-                    progress3.Indeterminate = true;
-                    progress3.SetProgressStyle(ProgressDialogStyle.Spinner);
-                    progress3.SetMessage("Registrando modo online...");
-                    progress3.SetCancelable(false);
-                    RunOnUiThread(() =>
-                    {
-                        progress3.Show();
-                    });
-                    await Task.Run(async () =>
-                    {
-                        List<MovimientoErpLite> lMovimientoLite = new List<MovimientoErpLite>();
-                        var xlMovimientoLite = db.selectTableMovimiento();
-                        lMovimientoLite = xlMovimientoLite.Where(y => y.fk_almacen == idalmacen && y.cantidad > 0 && y.fk_movimiento_tipo.Equals(7)).ToList();
+                progress3 = new ProgressDialog(this);
+                progress3.Indeterminate = true;
+                progress3.SetProgressStyle(ProgressDialogStyle.Spinner);
+                progress3.SetMessage("Registrando modo online...");
+                progress3.SetCancelable(false);
+                RunOnUiThread(() =>
+                {
+                    progress3.Show();
+                });
+                await Task.Run(async () =>
+                {
+                    List<MovimientoErpLite> lMovimientoLite = new List<MovimientoErpLite>();
+                    var xlMovimientoLite = db.selectTableMovimiento();
+                    lMovimientoLite = xlMovimientoLite.Where(y => y.fk_almacen == idalmacen && y.cantidad > 0 && y.fk_movimiento_tipo == 7).ToList();
 
-                        if (lMovimientoLite != null && lMovimientoLite.Count > 0)
+                    if (lMovimientoLite != null && lMovimientoLite.Count > 0)
+                    {
+                        foreach (var movitem in lMovimientoLite)
                         {
-                            foreach (var movitem in lMovimientoLite)
+                            MovimientoErp movimiento = new MovimientoErp
                             {
-                                MovimientoErp movimiento = new MovimientoErp
-                                {
-                                    fk_movimiento_tipo = movitem.fk_movimiento_tipo,
-                                    fk_guia_remision_detalle = 0,
-                                    fk_venta_detalle = 0,
-                                    fk_comprobante_traslado_detalle = 0,
-                                    fk_nota_credito_detalle = 0,
-                                    fk_almacen = movitem.fk_almacen,
-                                    fk_producto = movitem.fk_producto,
-                                    cantidad = movitem.cantidad,
-                                    IDCODIGOGENERAL = movitem.IDCODIGOGENERAL,
-                                    fk_salida_almacen = movitem.fk_salida_almacen
-                                };
-                                newidmovimiento = await Data.InsertaMovimientoDB(movimiento);
-                                insercionesbd++;
-                                if (newidmovimiento > 0)
-                                {
+                                fk_movimiento_tipo = movitem.fk_movimiento_tipo,
+                                fk_guia_remision_detalle = 0,
+                                fk_venta_detalle = 0,
+                                fk_comprobante_traslado_detalle = 0,
+                                fk_nota_credito_detalle = 0,
+                                fk_almacen = movitem.fk_almacen,
+                                fk_producto = movitem.fk_producto,
+                                cantidad = movitem.cantidad,
+                                IDCODIGOGENERAL = movitem.IDCODIGOGENERAL,
+                                fk_salida_almacen = movitem.fk_salida_almacen
+                            };
+                            newidmovimiento = await Data.InsertaMovimientoDB(movimiento);
+                            insercionesbd++;
+                            if (newidmovimiento > 0)
+                            {
 
-                                }
                             }
-
                         }
-                    }).ContinueWith(data => RunOnUiThread(() => progress3.Hide()));
+
+                    }
+                }).ContinueWith(data => RunOnUiThread(() => progress3.Hide()));
             }
             catch (Exception es)
             {
-                RunOnUiThread(() => Toast.MakeText(this, "HUBO UN ERROR EN EL REGISTRO DEL TRASLADO! EXCEPTION: " + es.Message, ToastLength.Short).Show());
+                RunOnUiThread(() => Toast.MakeText(this, "HUBO UN ERROR EN EL REGISTRO! EXCEPTION: " + es.Message, ToastLength.Short).Show());
             }
             if (insercionesbd > 0)
             {
-                RunOnUiThread(() => Toast.MakeText(this, "SE REGISTRÓ CORRECTAMENTE EL INVENTARIO! \nSE REGISTRARON: " + insercionesbd.ToString().PadLeft(2, '0') + " PRODUCTOS", ToastLength.Long).Show());
+                RunOnUiThread(() => Toast.MakeText(this, "SE REGISTRÓ CORRECTAMENTE! \nSE REGISTRARON: " + insercionesbd.ToString().PadLeft(2, '0') + " PRODUCTOS", ToastLength.Long).Show());
                 try
                 {
                     var q = Task.Run(async () =>
@@ -227,7 +227,7 @@ namespace AlmacenApp.Activities
                 }
                 catch (Exception exi)
                 {
-                    RunOnUiThread(() => Toast.MakeText(this, "HUBO UN ERROR EN EL REGISTRO DEL INVENTARIO! EXCEPTION: " + exi.Message, ToastLength.Long).Show());
+                    RunOnUiThread(() => Toast.MakeText(this, "HUBO UN ERROR EN EL REGISTRO! EXCEPTION: " + exi.Message, ToastLength.Long).Show());
                     Intent _main = new Intent(this, typeof(InventarioActivity));
                     _main.SetFlags(ActivityFlags.NewTask);
                     this.StartActivity(_main);
@@ -235,7 +235,7 @@ namespace AlmacenApp.Activities
             }
             else
             {
-                RunOnUiThread(() => Toast.MakeText(this, "HUBO UN ERROR EN EL REGISTRO DEL INVENTARIO!", ToastLength.Short).Show());
+                RunOnUiThread(() => Toast.MakeText(this, "HUBO UN ERROR EN EL REGISTRO!", ToastLength.Short).Show());
             }
         }
 
@@ -245,6 +245,9 @@ namespace AlmacenApp.Activities
             {
                 db.CreateDatabaseMovimiento();
                 RunOnUiThread(() => Toast.MakeText(this, "LA DATA SE LIMPIO CORRECTAMENTE!", ToastLength.Long).Show());
+                Intent _main = new Intent(this, typeof(InventarioActivity));
+                _main.SetFlags(ActivityFlags.NewTask);
+                this.StartActivity(_main);
             }
             catch (Exception ex)
             {
@@ -684,6 +687,12 @@ namespace AlmacenApp.Activities
                     var newactis = new Intent(this, typeof(ProductoSalidaActivity));
                     StartActivity(newactis);
                     break;
+                case Resource.Id.menu_almacen_personal:
+                    toolbar.Title = "Reporte";
+                    var newactirps = new Intent(this, typeof(ProductoPersonalHistoryActivity));
+                    StartActivity(newactirps);
+                    break;
+
             }
         }
 
@@ -701,7 +710,7 @@ namespace AlmacenApp.Activities
             };
         }
 
-        
+
         public async void OnDismiss(IDialogInterface dialog)
         {
             try

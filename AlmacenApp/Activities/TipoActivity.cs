@@ -26,7 +26,7 @@ using AlmacenApp.Fragments;
 
 namespace AlmacenApp.Activities
 {
-    [Activity(Label = "Producto Tipo", MainLauncher = false, WindowSoftInputMode = SoftInput.AdjustPan, ScreenOrientation = Android.Content.PM.ScreenOrientation.Landscape, Theme = "@style/NavigationStyle")]
+    [Activity(Label = "Producto Tipo", MainLauncher = false, WindowSoftInputMode = SoftInput.AdjustPan, ScreenOrientation = Android.Content.PM.ScreenOrientation.Landscape, Theme = "@style/NavigationStyle", NoHistory = true)]
     public class TipoActivity : AppCompatActivity, IDialogInterfaceOnDismissListener
     {
         private AppPreferences _ap;
@@ -175,6 +175,11 @@ namespace AlmacenApp.Activities
                     toolbar.Title = "Salidas";
                     var newactis = new Intent(this, typeof(ProductoSalidaActivity));
                     StartActivity(newactis);
+                    break;
+                case Resource.Id.menu_almacen_personal:
+                    toolbar.Title = "Reporte";
+                    var newactirps = new Intent(this, typeof(ProductoPersonalHistoryActivity));
+                    StartActivity(newactirps);
                     break;
             }
         }

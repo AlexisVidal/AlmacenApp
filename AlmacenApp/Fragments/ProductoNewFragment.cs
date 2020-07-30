@@ -318,6 +318,11 @@ namespace AlmacenApp.Fragments
 
         private void BtnCancelarNewProductoFrg_Click(object sender, EventArgs e)
         {
+            var mifragment = (ProductoNewFragment)FragmentManager.FindFragmentByTag("fragnewpro");
+            mifragment?.Dismiss();
+
+            var mifragment2 = (ProductoNewFragment)FragmentManager.FindFragmentByTag("fragnewpro");
+            mifragment2?.Dismiss();
             Dismiss();
         }
     }

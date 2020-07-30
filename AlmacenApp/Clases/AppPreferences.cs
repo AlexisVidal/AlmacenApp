@@ -47,6 +47,16 @@ namespace AlmacenApp.Clases
             return idUsuarioSP.GetString(IDUSUARIO, "");
         }
 
+        public static String IDCODIGOGENERALLOGIN = "IDCODIGOGENERALLOGIN";
+        public void saveIdCodigoGeneralLoginTempKey(string key)
+        {
+            idUsuarioSPE.PutString(IDCODIGOGENERALLOGIN, key);
+            idUsuarioSPE.Commit();
+        }
+        public string getIdCodigoGeneralLoginTempKey()
+        {
+            return idUsuarioSP.GetString(IDCODIGOGENERALLOGIN, "");
+        }
         public static String NOMBRES = "NOMBRES";
         public void saveNombresKey(string key)
         {
@@ -324,5 +334,16 @@ namespace AlmacenApp.Clases
             return idUsuarioSP.GetString(PRODUCTOABREVIATURA, "");
         }
 
+
+        public static String IDSALIDAMOVIMIENTO = "IDSALIDAMOVIMIENTO";
+        public void saveIdSalidaMovimientoTempKey(string key)
+        {
+            idUsuarioSPE.PutString(IDSALIDAMOVIMIENTO, key);
+            idUsuarioSPE.Commit();
+        }
+        public string getIdSalidaMovimientoTempKey()
+        {
+            return idUsuarioSP.GetString(IDSALIDAMOVIMIENTO, "");
+        }
     }
 }

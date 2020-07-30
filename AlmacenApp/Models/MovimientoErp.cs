@@ -41,7 +41,8 @@ namespace AlmacenApp.Models
         public int fk_producto { get; set; }
 
         [JsonProperty("f_movimiento")]
-        public string f_movimiento { get; set; }
+        public DateTime f_movimiento { get; set; }
+       // public string f_movimiento { get; set; }
 
         [JsonProperty("cantidad")]
         public decimal cantidad { get; set; }
@@ -145,5 +146,13 @@ namespace AlmacenApp.Models
         public string abreviatura { get; set; }
         public string unidad_medida { get; set; }
         public int fk_salida_almacen { get; set; }
+        public int nro_inventario { get; set; }
+        public decimal precio_costo { get; set; }
+        public string codigo_sku { get; set; }
+        public string descripcion_producto_tipo { get; set; }
+        public string nombre_almacen { get; set; }
+        public string ubicacion { get; set; }
+        public string nomb_full { get; set; }
+        public string nombres { get; set; }
     }
 }

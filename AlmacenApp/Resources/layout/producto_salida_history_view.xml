@@ -1,0 +1,113 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:weightSum="1">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.10"
+        android:gravity="center_vertical|center_horizontal">
+        <TextView
+            android:text="FECHA"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtFechaPSIR"
+            android:textColor="#343434"
+            android:typeface="normal"
+            android:textStyle="normal"
+            android:textSize="11dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.30"
+        android:gravity="center_vertical|center_horizontal">
+        <TextView
+            android:text="PERSONAL"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtPersonalPSIR"
+            android:textColor="#343434"
+            android:typeface="normal"
+            android:textStyle="normal"
+            android:textSize="11dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.3"
+        android:gravity="center_vertical|center_horizontal">
+        <TextView
+            android:text="PRODUCTO:"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtProductoPSIR"
+            android:textColor="#343434"
+            android:typeface="normal"
+            android:textStyle="normal"
+            android:textSize="11dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.1"
+        android:layout_gravity="center"
+        android:gravity="center_vertical|center_horizontal">
+        <TextView
+            android:text="U. M."
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtUnidadPSIR"
+            android:textColor="#343434"
+            android:typeface="normal"
+            android:textStyle="normal"
+            android:textSize="11dp" />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.1"
+        android:gravity="center_vertical|center_horizontal">
+        <TextView
+            android:text="CANT:"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtCantPSIR"
+            android:textColor="#343434"
+            android:typeface="normal"
+            android:textStyle="normal"
+            android:textSize="11dp" />
+    </LinearLayout>
+<LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.10"
+        android:layout_gravity="center"
+        android:gravity="center_vertical|center_horizontal">
+        <TextView
+            android:text="ALMACEN"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtAlmacenPSIR"
+            android:textColor="#343434"
+            android:typeface="normal"
+            android:textStyle="normal"
+            android:textSize="11dp" />
+    </LinearLayout>
+</LinearLayout>

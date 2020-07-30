@@ -80,6 +80,8 @@ namespace AlmacenApp.Fragments
                         _ap.saveIdProductoTipoKey("");
                         var mifragment = (ProductoDeleteFragment)FragmentManager.FindFragmentByTag("fragdeletep");
                         mifragment?.Dismiss();
+                        var mifragment2 = (ProductoDeleteFragment)FragmentManager.FindFragmentByTag("fragdeletep");
+                        mifragment2?.Dismiss();
                     }));
                     this.Activity.RunOnUiThread(() => alert.Show());
                 }

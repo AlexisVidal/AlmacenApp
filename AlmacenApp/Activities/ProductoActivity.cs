@@ -292,6 +292,11 @@ namespace AlmacenApp.Activities
                     var newactis = new Intent(this, typeof(ProductoSalidaActivity));
                     StartActivity(newactis);
                     break;
+                case Resource.Id.menu_almacen_personal:
+                    toolbar.Title = "Reporte";
+                    var newactirps = new Intent(this, typeof(ProductoPersonalHistoryActivity));
+                    StartActivity(newactirps);
+                    break;
             }
         }
 
@@ -313,13 +318,10 @@ namespace AlmacenApp.Activities
         {
             try
             {
-                var transaction = this.FragmentManager.BeginTransaction();
-                var prev = FragmentManager.FindFragmentByTag("fragnewpro");
-                if (prev != null)
-                {
-                    transaction.Remove(prev);
-                    transaction.CommitNow();
-                }
+                Intent _main = new Intent(this, typeof(ProductoActivity));
+                _main.SetFlags(ActivityFlags.NewTask);
+                this.StartActivity(_main);
+
                 CleanVars();
                 idproducto = 0;
                 TraeProductos();
