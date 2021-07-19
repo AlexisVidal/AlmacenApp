@@ -311,6 +311,28 @@ namespace AlmacenApp.Clases
             return idUsuarioSP.GetString(IDALMACEN, "");
         }
 
+        public static String IDVEHICULO = "IDVEHICULO";
+        public void saveIdVehiculoTempKey(string key)
+        {
+            idUsuarioSPE.PutString(IDVEHICULO, key);
+            idUsuarioSPE.Commit();
+        }
+        public string getIdVehiculoTempKey()
+        {
+            return idUsuarioSP.GetString(IDVEHICULO, "");
+        }
+
+        public static String PLACA = "PLACA";
+        public void savePlacaTempKey(string key)
+        {
+            idUsuarioSPE.PutString(PLACA, key);
+            idUsuarioSPE.Commit();
+        }
+        public string getPlacaTempKey()
+        {
+            return idUsuarioSP.GetString(PLACA, "");
+        }
+
         public static String ALMACEN = "ALMACEN";
         public void saveAlmacenTempKey(string key)
         {

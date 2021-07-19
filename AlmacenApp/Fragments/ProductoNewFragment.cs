@@ -130,7 +130,7 @@ namespace AlmacenApp.Fragments
                             spinner_unidad.Adapter = adapter;
                             if (idproductounidad > 0)
                             {
-                                var itemsel = listunidades.FirstOrDefault(x => x.id_unidad_medida == idproductounidad);
+                                var itemsel = listunidades.FirstOrDefault(yx => yx.id_unidad_medida == idproductounidad);
                                 int indexo = listunidades.IndexOf(itemsel);
                                 spinner_unidad.SetSelection(indexo);
                             }

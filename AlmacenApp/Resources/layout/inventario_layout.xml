@@ -130,7 +130,24 @@
                     android:orientation="vertical"
                     android:layout_width="0dp"
                     android:layout_height="fill_parent"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.2"
+                    android:gravity="center_vertical|center_horizontal">
+                    <TextView
+                        android:text="MARCA"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#343434"
+                        android:layout_marginTop="10dp"
+                        android:typeface="normal"
+                        android:textStyle="bold"
+                        android:textSize="16dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="0.3"
                     android:gravity="center_vertical|center_horizontal">
                     <TextView
                         android:text="PRODUCTO"
@@ -147,7 +164,25 @@
                     android:orientation="vertical"
                     android:layout_width="0dp"
                     android:layout_height="fill_parent"
-                    android:layout_weight="0.3"
+                    android:layout_weight="0.1"
+                    android:layout_gravity="center"
+                    android:gravity="center_vertical|center_horizontal">
+                    <TextView
+                        android:text="U.M."
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#343434"
+                        android:layout_marginTop="10dp"
+                        android:typeface="normal"
+                        android:textStyle="bold"
+                        android:textSize="16dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="0.2"
                     android:layout_gravity="center"
                     android:gravity="center_vertical|center_horizontal">
                     <TextView

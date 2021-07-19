@@ -8,7 +8,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp">
+        android:layout_marginBottom="10dp">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,6 +46,59 @@
             android:textColor="@color/black"/>
     </LinearLayout>
     <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:background="@android:color/white">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="VEHICULO: "
+            android:textSize="12sp"
+            android:textStyle="normal"
+            android:gravity="left"
+            android:layout_gravity="center"
+            android:textColor="@color/black"/>
+        <Spinner
+            android:layout_width="350dp"
+            android:layout_height="40dp"
+            android:id="@+id/spVehiculos"
+            android:layout_gravity="center"
+            style="@android:style/Widget.Spinner"
+            android:gravity="center"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="14dp"
+            android:textSize="12sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:text="OBSERVACIONES: "
+            android:textSize="12sp"
+            android:textStyle="normal"
+            android:gravity="left"
+            android:layout_gravity="center"
+            android:textColor="@color/black"/>
+        <EditText
+            android:id="@+id/edt_observacionSalida"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="40.0dp"
+            android:maxLines="1"
+            android:textSize="12sp"
+            android:hint="Ingrese observaciones"
+            android:background="@android:drawable/editbox_background_normal"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/black"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:inputType="textCapWords"/>
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linearSearchProduct"
@@ -60,7 +113,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:maxLines="1"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:hint="@string/hint_search"
             android:textColor="@android:color/black"
             android:textColorHint="@android:color/black"
@@ -97,7 +150,24 @@
             android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_weight="0.5"
+            android:layout_weight="0.2"
+            android:gravity="center_vertical|center_horizontal">
+            <TextView
+                android:text="MARCA"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#343434"
+                android:layout_marginTop="10dp"
+                android:typeface="normal"
+                android:textStyle="bold"
+                android:textSize="16dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.3"
             android:gravity="center_vertical|center_horizontal">
             <TextView
                 android:text="PRODUCTO"
@@ -190,7 +260,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="PRODUCTO: "
-            android:textSize="16dp"
+            android:textSize="14sp"
             android:textStyle="bold"
             android:gravity="left"
             android:textColor="@color/black"/>
@@ -199,7 +269,7 @@
             android:layout_height="wrap_content"
             android:text="..."
             android:id="@+id/txtProductoSelected"
-            android:textSize="16dp"
+            android:textSize="14sp"
             android:textStyle="normal"
             android:gravity="left"
             android:textColor="@color/black"/>
@@ -207,7 +277,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" | CANT.: "
-            android:textSize="16dp"
+            android:textSize="14sp"
             android:textStyle="bold"
             android:gravity="left"
             android:layout_marginLeft="20dp"
@@ -216,7 +286,7 @@
             android:id="@+id/edtCantxSalida"
             android:layout_width="90dp"
             android:layout_height="match_parent"
-            android:textSize="16dp"
+            android:textSize="14sp"
             android:background="@android:drawable/editbox_background_normal"
             android:textColor="@android:color/black"
             android:inputType="number" />
@@ -226,7 +296,7 @@
             android:layout_height="48dp"
             android:layout_below="@id/edtCantxI"
             android:id="@+id/btnCantSalida"
-            android:textSize="20dp"
+            android:textSize="14sp"
             android:textColor="#fff"
             android:textStyle="bold"
             android:paddingLeft="5dp"
@@ -343,14 +413,14 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="160dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp">
         <ListView
             android:minWidth="25px"
             android:minHeight="25px"
             android:layout_width="match_parent"
-            android:layout_height="240dp"
+            android:layout_height="200dp"
             android:id="@+id/rvproductosSelectedSalida"
             android:background="@color/md_grey_200" />
     </LinearLayout>

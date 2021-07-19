@@ -32,6 +32,7 @@ namespace AlmacenApp.Fragments
         string idcodigogeneral = "";
         string nombretrabajador = "";
         private EditText edt_searchproductsListSalida;
+        private EditText edt_observacionSalida;
         ListView rvproductosSalida;
         List<ProductoErpLite> listproductos;
 
@@ -52,10 +53,15 @@ namespace AlmacenApp.Fragments
         int resultadomovimiento = 0;
         Button btnClosePSIFrg;
         int idsalidaactual = 0;
+        int idvehiculo = 0;
 
         List<SalidaProductoErpLite> lsalidaslite;
         List<MovimientoErpLite> lmovimientoslite;
         ProductoSalidaPersonalFragmentAdapter productsalidaactivity;
+
+        Spinner spVehiculos;
+        List<VehiculoErp> lvehiculos;
+
         public override void OnDismiss(IDialogInterface dialog)
         {
             base.OnDismiss(dialog);
@@ -110,10 +116,15 @@ namespace AlmacenApp.Fragments
                     args.Handled = true;
                 }
             };
+
+            edt_observacionSalida = view.FindViewById<EditText>(Resource.Id.edt_observacionSalida);
+
             txtProductoSelected = view.FindViewById<TextView>(Resource.Id.txtProductoSelected);
             edtCantxSalida = view.FindViewById<EditText>(Resource.Id.edtCantxSalida);
             btnCantSalida = view.FindViewById<Button>(Resource.Id.btnCantSalida);
 
+            spVehiculos = view.FindViewById<Spinner>(Resource.Id.spVehiculos);
+            
             btnCantSalida.Click += BtnCantSalida_Click;
             btnClosePSIFrg.Click += BtnClosePSIFrg_Click;
             LlenaData();
@@ -167,6 +178,8 @@ namespace AlmacenApp.Fragments
             {
                 decimal cant = 0;
                 cant = Convert.ToDecimal(edtCantxSalida.Text);
+
+                string observacion = edt_observacionSalida.Text.Trim().ToUpper();
                 if (id_producto == 0)
                 {
                     this.Activity.RunOnUiThread(() => Toast.MakeText(thiscontext, "Seleccione primero el producto!", ToastLength.Short).Show());
@@ -192,7 +205,9 @@ namespace AlmacenApp.Fragments
                             IDCODIGOGENERAL = idcodigogeneral,
                             IdSalida = idsalidaactual,
                             abreviatura = abreviatura,
-                            almacen = almacen
+                            almacen = almacen,
+                            fk_vehiculo = idvehiculo,
+                            observaciones = observacion
                         };
                         resultadomovimiento = db.insertIntoMovimiento(movimiento);
                         if (resultadomovimiento > 0)
@@ -323,6 +338,61 @@ namespace AlmacenApp.Fragments
                 nom_producto = "";
                 descripcion_producto_tipo = "";
                 abreviatura = "";
+            }
+        }
+
+        async public override void OnResume()
+        {
+            base.OnResume();
+            try
+            {
+                var xlvehiculos = await Data.CargaVehiculos();
+                if (xlvehiculos != null && xlvehiculos.Count > 0)
+                {
+                    VehiculoErp newalmacen = new VehiculoErp()
+                    {
+                        id_vehiculo = -1,
+                        placa = "",
+                        marca = "",
+                        modelo = ""
+                    };
+                    xlvehiculos.Add(newalmacen);
+                    lvehiculos = xlvehiculos.OrderBy(x => x.marca).ToList();
+                    LlenaVehiculos(lvehiculos);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+        }
+        private async void LlenaVehiculos(List<VehiculoErp> lvehiculos)
+        {
+            try
+            {
+                ArrayAdapter adapter = new ArrayAdapter(_mContext, Resource.Layout.spinner_item_medium, lvehiculos.OrderBy(x => x.marca).ToList());
+                this.Activity.RunOnUiThread(() => adapter.SetDropDownViewResource(Resource.Layout.spinner_dropdown_item));
+                this.Activity.RunOnUiThread(() => spVehiculos.ItemSelected += SpVehiculos_ItemSelected);
+                this.Activity.RunOnUiThread(() => spVehiculos.Adapter = adapter);
+            }
+            catch (Exception ex)
+            {
+                this.Activity.RunOnUiThread(() => Toast.MakeText(thiscontext, "NO SE PUDO CARGAR DATA DE VEHICULOS! EXCEPCION: " + ex.Message, ToastLength.Short).Show());
+            }
+        }
+
+        private void SpVehiculos_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            try
+            {
+                idvehiculo = lvehiculos.ElementAt(spVehiculos.SelectedItemPosition).id_vehiculo;
+                _ap.saveIdVehiculoTempKey(idvehiculo.ToString());
+                _ap.savePlacaTempKey(lvehiculos.ElementAt(spVehiculos.SelectedItemPosition).placa.ToString());
+            }
+            catch (Exception exception)
+            {
+                idvehiculo = 0;
             }
         }
     }

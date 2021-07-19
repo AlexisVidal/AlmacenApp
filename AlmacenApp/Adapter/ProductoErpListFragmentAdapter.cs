@@ -75,6 +75,10 @@ namespace AlmacenApp.Adapter
             TextView txtTipoI = row.FindViewById<TextView>(Resource.Id.txtTipoI);
             txtTipoI.Text = listItems[position].producto_tipo.ToString();
 
+            TextView txtMarcaProductoI = row.FindViewById<TextView>(Resource.Id.txtMarcaProductoI);
+            txtMarcaProductoI.Text = listItems[position].marca.ToString();
+            
+
             //TextView txtTotaldetallesoli = row.FindViewById<TextView>(Resource.Id.txtTotaldetallesoli);
             //txtTotaldetallesoli.Text = "STOCK: " + listItems[position].existencia.ToString();
 

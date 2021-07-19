@@ -66,6 +66,9 @@ namespace AlmacenApp.Adapter
             TextView txtCodProductoI = row.FindViewById<TextView>(Resource.Id.txtCodProductoI);
             txtCodProductoI.Text = listItems[position].cod_producto.ToString();
 
+            TextView txtMarcaProductoI = row.FindViewById<TextView>(Resource.Id.txtMarcaProductoI);
+            txtMarcaProductoI.Text = listItems[position].marca.ToString();
+
             TextView txtProductoI = row.FindViewById<TextView>(Resource.Id.txtProductoI);
             txtProductoI.Text = listItems[position].nom_producto.ToString();
 

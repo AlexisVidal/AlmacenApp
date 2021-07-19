@@ -154,5 +154,8 @@ namespace AlmacenApp.Models
         public string ubicacion { get; set; }
         public string nomb_full { get; set; }
         public string nombres { get; set; }
+        public int fk_almacen_movimiento { get; set; }
+        public int fk_vehiculo { get; set; }
+        public string observaciones { get; set; }
     }
 }

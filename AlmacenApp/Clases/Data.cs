@@ -300,6 +300,42 @@ namespace AlmacenApp.Clases
             }
             return newidmovimiento;
         }
+        internal static async Task<int> InsertaAlmacenMovimientoDB(AlmacenMovimientoErp movimiento)
+        {
+            _connectionInfo = _ap.getServerurlKey();
+            int newidmovimiento = 0;
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(_connectionInfo);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                string serializedObject = JsonConvert.SerializeObject(movimiento);
+                HttpContent contentPost = new StringContent(serializedObject, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("Movimiento/t_almacen_movimientoInsert", contentPost);
+                if (response.IsSuccessStatusCode && response.RequestMessage != null)
+                {
+                    var respuesta = await response.Content.ReadAsStringAsync();
+                    //JArray solicitus = JArray.Parse();
+                    //JsonSerializerSettings settings = new JsonSerializerSettings();
+                    //settings.NullValueHandling = NullValueHandling.Ignore;
+                    //settings.MissingMemberHandling = MissingMemberHandling.Ignore;
+                    if (respuesta != null && respuesta != "")
+                    {
+                        newidmovimiento = Convert.ToInt32(respuesta);
+                    }
+                    else
+                    {
+                        newidmovimiento = 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                newidmovimiento = 0;
+            }
+            return newidmovimiento;
+        }
         internal static async Task<int> InsertaSalidaProductoDB(SalidaProductoErp salida)
         {
             _connectionInfo = _ap.getServerurlKey();
@@ -318,7 +354,7 @@ namespace AlmacenApp.Clases
                     var resultao = await response.Content.ReadAsStringAsync();
                     if (resultao != null && resultao != "")
                     {
-                        newidsalida =  Convert.ToInt32(resultao);
+                        newidsalida = Convert.ToInt32(resultao);
                     }
                     else
                     {
@@ -374,7 +410,7 @@ namespace AlmacenApp.Clases
                 return new List<ProductoTipoErp>();
             }
         }
-        internal static async Task<int> InserTipo(int idproductolinea,string descripcion, string abreviatura_tipo)
+        internal static async Task<int> InserTipo(int idproductolinea, string descripcion, string abreviatura_tipo)
         {
             _connectionInfo = _ap.getServerurlKey();
             ProductoTipoErp newinsert;
@@ -436,7 +472,7 @@ namespace AlmacenApp.Clases
                     nom_producto = descripcion,
                     cod_producto = "",
                     codigo_sku = codigosku,
-                    estado ="1"
+                    estado = "1"
                 };
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri(_connectionInfo);
@@ -620,7 +656,7 @@ namespace AlmacenApp.Clases
                 string serializedObject = JsonConvert.SerializeObject(entidad);
                 HttpContent contentPost = new StringContent(serializedObject, Encoding.UTF8, "application/json");
                 var response = await client.PostAsync("Productoerp/t_productoSelectText_4", contentPost);
-                
+
 
                 if (response.IsSuccessStatusCode && response.RequestMessage != null)
                 {
@@ -968,6 +1004,45 @@ namespace AlmacenApp.Clases
             catch (Exception ex)
             {
                 return new List<MovimientoErp>();
+            }
+        }
+
+        internal static async Task<List<VehiculoErp>> CargaVehiculos()
+        {
+            _connectionInfo = _ap.getServerurlKey();
+            try
+            {
+                HttpClient client = new HttpClient();
+                //var _connectionInfo = serverurl;
+                client.BaseAddress = new Uri(_connectionInfo);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage response = await client.GetAsync("Tallererp/t_vehiculoSelectAll");
+
+                if (response.IsSuccessStatusCode && response.RequestMessage != null)
+                {
+                    JArray jentidad = JArray.Parse(await response.Content.ReadAsStringAsync());
+                    JsonSerializerSettings settings = new JsonSerializerSettings();
+                    settings.NullValueHandling = NullValueHandling.Ignore;
+                    settings.MissingMemberHandling = MissingMemberHandling.Ignore;
+                    if (jentidad != null && jentidad.Count > 0)
+                    {
+                        var listlineaxs = JsonConvert.DeserializeObject<List<VehiculoErp>>(jentidad.ToString(), settings);
+                        return listlineaxs;
+                    }
+                    else
+                    {
+                        return new List<VehiculoErp>();
+                    }
+                }
+                else
+                {
+                    return new List<VehiculoErp>();
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<VehiculoErp>();
             }
         }
     }

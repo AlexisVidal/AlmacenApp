@@ -25,6 +25,7 @@ namespace AlmacenApp.Activities
     public class InventarioActivity : AppCompatActivity, IDialogInterfaceOnDismissListener
     {
         private AppPreferences _ap;
+        string idcodigogeneral = "";
         private readonly Context _mContext = Application.Context;
         public static string serverurl = "";
         List<ProductoErpLite> listproductos;
@@ -82,6 +83,7 @@ namespace AlmacenApp.Activities
             navigationView.NavigationItemSelected += NavigationView_NavigationItemSelected;
 
             serverurl = _ap.getServerurlKey();
+            idcodigogeneral = _ap.getIdCodigoGeneralLoginTempKey();
             listproductos = new List<ProductoErpLite>();
             spAlmacenSimpleI = FindViewById<Spinner>(Resource.Id.spAlmacenSimpleIp);
             rvproductosIp = FindViewById<ListView>(Resource.Id.rvproductosIp);
@@ -159,6 +161,7 @@ namespace AlmacenApp.Activities
         {
             int insercionesbd = 0;
             int newidmovimiento = 0;
+            int newidalmacenmovimiento = 0;
             int newidmovimientorec = 0;
 
             try
@@ -180,6 +183,23 @@ namespace AlmacenApp.Activities
 
                     if (lMovimientoLite != null && lMovimientoLite.Count > 0)
                     {
+                        #region t_almacen_movimiento
+                        string codmovimiento = "";
+                        AlmacenMovimientoErp almamov = new AlmacenMovimientoErp()
+                        {
+                            fk_almacen = lMovimientoLite[0].fk_almacen,
+                            fk_movimiento_tipo = lMovimientoLite[0].fk_movimiento_tipo,
+                            codigo_movimiento_tipo = "I",
+                            IDCODIGOGENERAL = idcodigogeneral,
+                            cliente = "",
+                            direccion = "",
+                            oc_os = "",
+                            maquina_unidad = "",
+                            observaciones = "",
+                            IDRESPONSABLE = ""
+                        };
+                        newidalmacenmovimiento = await Data.InsertaAlmacenMovimientoDB(almamov);
+                        #endregion
                         foreach (var movitem in lMovimientoLite)
                         {
                             MovimientoErp movimiento = new MovimientoErp
@@ -193,7 +213,8 @@ namespace AlmacenApp.Activities
                                 fk_producto = movitem.fk_producto,
                                 cantidad = movitem.cantidad,
                                 IDCODIGOGENERAL = movitem.IDCODIGOGENERAL,
-                                fk_salida_almacen = movitem.fk_salida_almacen
+                                fk_salida_almacen = movitem.fk_salida_almacen,
+                                fk_almacen_movimiento = newidalmacenmovimiento
                             };
                             newidmovimiento = await Data.InsertaMovimientoDB(movimiento);
                             insercionesbd++;
@@ -204,7 +225,7 @@ namespace AlmacenApp.Activities
                         }
 
                     }
-                }).ContinueWith(data => RunOnUiThread(() => progress3.Hide()));
+                }).ContinueWith(data => RunOnUiThread(() => progress3.Hide())).ConfigureAwait(false);
             }
             catch (Exception es)
             {

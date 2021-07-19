@@ -309,6 +309,9 @@ namespace AlmacenApp.Activities
                                             cantidad = movitem.cantidad,
                                             IDCODIGOGENERAL = movitem.IDCODIGOGENERAL,
                                             fk_salida_almacen = nuevoidsalida,
+                                            fk_vehiculo = movitem.fk_vehiculo,
+                                            fk_almacen_movimiento = 0,
+                                            observaciones = movitem.observaciones
                                         };
                                         newidmovimiento = await Data.InsertaMovimientoDB(movimiento);
                                         insercionesbd++;
